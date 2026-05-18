@@ -1,11 +1,15 @@
-﻿<!DOCTYPE html><html lang="en"><head>
+﻿<!DOCTYPE html>
+<html lang="en">
+<head>
     <meta charset="utf-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
     <title>@ViewData["Title"] - TechMoveApp</title>
     <script type="importmap"></script>
     <link rel="stylesheet" href="~/lib/bootstrap/dist/css/bootstrap.min.css" />
     <link rel="stylesheet" href="~/css/site.css" asp-append-version="true" />
-    <link rel="stylesheet" href="~/TechMoveApp.styles.css" asp-append-version="true" /></head><body>
+    <link rel="stylesheet" href="~/TechMoveApp.styles.css" asp-append-version="true" />
+</head>
+<body>
     <header>
         <nav class="navbar navbar-expand-sm navbar-toggleable-sm navbar-light bg-white border-bottom box-shadow mb-3">
             <div class="container-fluid">
@@ -19,14 +23,14 @@
                         <li class="nav-item">
                             <a class="nav-link text-dark fw-bold" asp-area="" asp-controller="Clients" asp-action="Index">Clients</a>
                         </li>
-                        
+
                         <li class="nav-item dropdown">
                             <a class="nav-link dropdown-toggle text-dark fw-bold" href="#" id="contractsDropdown" role="button" data-bs-toggle="dropdown" aria-expanded="false">
                                 Contracts
                             </a>
                             <ul class="dropdown-menu" aria-labelledby="contractsDropdown">
-                                <li><a class="dropdown-item" asp-controller="Contracts" asp-action="Index">📊 View Dashboard</a></li>
-                                <li><a class="dropdown-item" asp-controller="Contracts" asp-action="Create">➕ Create New Contract</a></li>
+                                <li><a class="dropdown-item" asp-controller="Contracts" asp-action="Index"> View Dashboard</a></li>
+                                <li><a class="dropdown-item" asp-controller="Contracts" asp-action="Create"> Create New Contract</a></li>
                             </ul>
                         </li>
 
@@ -35,8 +39,8 @@
                                 Service Requests
                             </a>
                             <ul class="dropdown-menu" aria-labelledby="requestsDropdown">
-                                <li><a class="dropdown-item" asp-controller="ServiceRequests" asp-action="Index">📋 View All Requests</a></li>
-                                <li><a class="dropdown-item" asp-controller="ServiceRequests" asp-action="Create">➕ Log Service Request</a></li>
+                                <li><a class="dropdown-item" asp-controller="ServiceRequests" asp-action="Index"> View All Requests</a></li>
+                                <li><a class="dropdown-item" asp-controller="ServiceRequests" asp-action="Create"> Log Service Request</a></li>
                             </ul>
                         </li>
                     </ul>
@@ -58,4 +62,5 @@
     <script src="~/lib/jquery/dist/jquery.min.js"></script>
     <script src="~/lib/bootstrap/dist/js/bootstrap.bundle.min.js"></script>
     <script src="~/js/site.js" asp-append-version="true"></script>
-    @await RenderSectionAsync("Scripts", required: false)</body></html>
+    @await RenderSectionAsync("Scripts", required: false)</body>
+</html>
