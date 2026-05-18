@@ -1,0 +1,30 @@
+﻿@model IEnumerable<TechMoveApp.Models.ServiceRequest>
+
+<div class="container mt-4">
+    <h2>Logged Service Requests Matrix</h2>
+    <table class="table table-hover border shadow-sm mt-3">
+        <thead class="table-secondary">
+            <tr>
+                <th>Request ID</th>
+                <th>Contract ID</th>
+                <th>Description</th>
+                <th>Cost (USD)</th>
+                <th>Cost (ZAR)</th>
+                <th>Status</th>
+            </tr>
+        </thead>
+        <tbody>
+            @foreach (var request in Model)
+            {
+                <tr>
+                    <td>@request.ServiceRequestId</td>
+                    <td>@request.ContractId</td>
+                    <td>@request.Description</td>
+                    <td>$@request.CostUSD.ToString("N2")</td>
+                    <td>R @request.CostZAR.ToString("N2")</td>
+                    <td><span class="badge bg-info text-dark">@request.Status</span></td>
+                </tr>
+            }
+        </tbody>
+    </table>
+</div>

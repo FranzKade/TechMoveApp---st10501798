@@ -1,0 +1,4 @@
+<Solution>
+  <Project Path="TechMoveApp/TechMoveApp.csproj" />
+  <Project Path="TestProject1/TestProject1.csproj" Id="79b96c5d-19f9-4535-a4c8-6cdceb99eb52" />
+</Solution>

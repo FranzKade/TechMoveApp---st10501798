@@ -1,0 +1,54 @@
+﻿@model IEnumerable<TechMoveApp.Models.Contract>
+@using TechMoveApp.Models
+<div class="container mt-4">
+    <h2>Contract Profile Matrix</h2>
+    @if (TempData["ErrorMessage"] != null)
+    {
+        <div class="alert alert-danger">@TempData["ErrorMessage"]</div>
+    }
+    <form method="get" class="row g-3 bg-light p-3 border mb-4 rounded">
+        <div class="col-md-3"><label class="form-label">Start Date</label><input type="date" name="startDate" class="form-control" /></div>
+        <div class="col-md-3"><label class="form-label">End Date</label><input type="date" name="endDate" class="form-control" /></div>
+        <div class="col-md-3">
+            <label class="form-label">Status Context</label>
+            <select name="status" class="form-select">
+                <option value="">-- Display All States --</option>
+                <option value="Draft">Draft</option>
+                <option value="Active">Active</option>
+                <option value="Expired">Expired</option>
+                <option value="OnHold">OnHold</option>
+            </select>
+        </div>
+        <div class="col-md-3 d-flex align-items-end"><button type="submit" class="btn btn-primary w-100">Query Records</button></div>
+    </form>
+
+    <table class="table table-hover border">
+        <thead class="table-secondary">
+            <tr><th>ID</th><th>Client Account</th><th>Effective Start</th><th>Expiration End</th><th>Lifecycle State</th><th>Agreement File</th><th>Actions</th></tr>
+        </thead>
+        <tbody>
+            @foreach (var item in Model)
+            {
+                <tr>
+                    <td>@item.ContractId</td>
+                    <td>@item.Client?.Name</td>
+                    <td>@item.StartDate.ToString("yyyy-MM-dd")</td>
+                    <td>@item.EndDate.ToString("yyyy-MM-dd")</td>
+                    <td><span class="badge @(item.Status == ContractStatus.Active ? "bg-success" : "bg-warning")">@item.Status</span></td>
+                    <td>
+                        @if (!string.IsNullOrEmpty(item.SignedAgreementFilePath))
+                        {
+                            <a asp-action="DownloadFile" asp-route-id="@item.ContractId" class="btn btn-sm btn-outline-secondary">Download Agreement</a>
+                        }
+                        else
+                        {
+
+                            <span class="text-muted">Unlinked</span>
+                        }
+                    </td>
+                    <td><a asp-controller="ServiceRequests" asp-action="Create" asp-route-contractId="@item.ContractId" class="btn btn-sm btn-success">Assign Service Request</a></td>
+                </tr>
+            }
+        </tbody>
+    </table>
+</div>

@@ -1,0 +1,8 @@
+.vs/
+[Db]in/
+[Oo]bj/
+*.user
+*.suo
+.DS_Store
+DocumentVault/*
+!DocumentVault/.gitkeep

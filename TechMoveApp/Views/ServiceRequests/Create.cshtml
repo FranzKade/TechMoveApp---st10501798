@@ -1,0 +1,43 @@
+﻿@model TechMoveApp.Models.ServiceRequest
+
+<div class="container mt-4" style="max-width: 550px;">
+    <h3>File Service Request Against Contract #@ViewBag.ContractId</h3>
+    <form asp-action="Create" method="post" class="border p-4 bg-light rounded shadow">
+        @Html.AntiForgeryToken()
+        <input type="hidden" asp-for="ContractId" value="@ViewBag.ContractId" />
+
+        <div class="mb-3">
+            <label class="form-label">Task Description</label>
+            <textarea asp-for="Description" class="form-control" rows="3" required></textarea>
+            <span asp-validation-for="Description" class="text-danger"></span>
+        </div>
+
+        <div class="row">
+            <div class="col-md-6 mb-3">
+                <label class="form-label">Cost (USD)</label>
+                <input type="number" step="0.01" id="costUsd" asp-for="CostUSD" class="form-control" required />
+                <span asp-validation-for="CostUSD" class="text-danger"></span>
+            </div>
+            <div class="col-md-6 mb-3">
+                <label class="form-label">Calculated Cost (ZAR)</label>
+                <input type="number" step="0.01" id="costZar" asp-for="CostZAR" class="form-control" readonly />
+                <span asp-validation-for="CostZAR" class="text-danger"></span>
+            </div>
+        </div>
+
+        <div class="alert alert-info py-2 small">
+            Current system base exchange conversion rate: <strong>1 USD = @ViewBag.ExchangeRate ZAR</strong>
+        </div>
+
+        <button type="submit" class="btn btn-success w-100">Submit Service Request</button>
+    </form>
+</div>
+
+<script>
+    document.getElementById('costUsd').addEventListener('input', function () {
+        var rate = @ViewBag.ExchangeRate;
+        var usdVal = parseFloat(this.value) || 0;
+        var zarCalculated = (usdVal * rate).toFixed(2);
+        document.getElementById('costZar').value = zarCalculated;
+    });
+</script>

@@ -1,0 +1,21 @@
+﻿@{
+    ViewData["Title"] = "Access Restricted";
+}
+
+<div class="container mt-5 text-center" style="max-width: 500px;">
+    <div class="card border-danger shadow">
+        <div class="card-header bg-danger text-white">
+            <h4 class="mb-0">⚠️ Security Protocol Violation</h4>
+        </div>
+        <div class="card-body py-4">
+            <p class="text-muted">
+                Your current context token lacks the required permissions to access this node.
+            </p>
+            <hr />
+            <div class="d-flex justify-content-around mt-3">
+                <a asp-controller="Account" asp-action="Login" class="btn btn-outline-secondary btn-sm">Re-Authenticate</a>
+                <a asp-controller="Contracts" asp-action="Index" class="btn btn-danger btn-sm">Return to Safe Matrix</a>
+            </div>
+        </div>
+    </div>
+</div>

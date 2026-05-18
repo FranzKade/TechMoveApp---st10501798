@@ -1,0 +1,30 @@
+﻿@model IEnumerable<TechMoveApp.Models.Client>
+
+<div class="container mt-4">
+    <div class="d-flex justify-content-between align-items-center mb-3">
+        <h2>Corporate Client Directory</h2>
+        <a asp-action="Create" class="btn btn-primary">Register New Client</a>
+    </div>
+
+    <table class="table table-striped table-bordered shadow-sm">
+        <thead class="table-dark">
+            <tr>
+                <th>Client ID</th>
+                <th>Company Name</th>
+                <th>Region</th>
+                <th>Contact Details</th>
+            </tr>
+        </thead>
+        <tbody>
+            @foreach (var client in Model)
+            {
+                <tr>
+                    <td>@client.ClientId</td>
+                    <td>@client.Name</td>
+                    <td>@client.Region</td>
+                    <td>@client.ContactDetails</td>
+                </tr>
+            }
+        </tbody>
+    </table>
+</div>

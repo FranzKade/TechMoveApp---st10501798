@@ -1,0 +1,47 @@
+﻿@model TechMoveApp.Models.Contract
+
+<div class="container mt-4" style="max-width: 600px;">
+    <h3 class="mb-3">Initialize Corporate Contract</h3>
+
+    <form asp-action="Create" method="post" enctype="multipart/form-data" class="p-4 border bg-white rounded shadow-sm">
+        @Html.AntiForgeryToken()
+
+        <div class="mb-3">
+            <label class="form-label font-weight-bold">Linked Corporate Client</label>
+            <select asp-for="ClientId" class="form-select" asp-items="ViewBag.Clients" required>
+                <option value="">-- Choose Account --</option>
+            </select>
+        </div>
+
+        <div class="row">
+            <div class="col-6 mb-3">
+                <label class="form-label font-weight-bold">Start Date</label>
+                <input asp-for="StartDate" type="date" class="form-control" required />
+            </div>
+            <div class="col-6 mb-3">
+                <label class="form-label font-weight-bold">End Date</label>
+                <input asp-for="EndDate" type="date" class="form-control" required />
+            </div>
+        </div>
+
+        <div class="row">
+            <div class="col-6 mb-3">
+                <label class="form-label font-weight-bold">SLA Service Level</label>
+                <input asp-for="ServiceLevel" class="form-control" placeholder="e.g. Gold Tier Premium" required />
+            </div>
+            <div class="col-6 mb-3">
+                <label class="form-label font-weight-bold">Initial Status</label>
+                <select asp-for="Status" class="form-select" asp-items="Html.GetEnumSelectList<TechMoveApp.Models.ContractStatus>()"></select>
+            </div>
+        </div>
+
+        <div class="mb-3">
+            <label class="form-label font-weight-bold">Upload Signed Agreement Document (.pdf only)</label>
+            <input type="file" name="signedAgreement" class="form-control" accept=".pdf" required />
+            <span class="text-muted d-block small mt-1">Security restriction: system rejects executable binaries or plain text files.</span>
+            @Html.ValidationMessage("SignedAgreementFile", "", new { @class = "text-danger small" })
+        </div>
+
+        <button type="submit" class="btn btn-primary w-100 py-2">Commit Contract Matrix</button>
+    </form>
+</div>
