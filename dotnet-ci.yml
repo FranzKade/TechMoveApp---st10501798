@@ -1,0 +1,35 @@
+name: .NET Core Automated CI
+
+# Trigger the automated testing suite on pushes or pull requests targeting the main branch
+on:
+  push:
+    branches: [ "main" ]
+  pull_request:
+    branches: [ "main" ]
+
+jobs:
+  build-and-test:
+    runs-on: ubuntu-latest
+
+    steps:
+    # 1. Pull down the code files from the repository into the cloud runner
+    - name: Checkout Source Code
+      uses: actions/checkout@v4
+
+    # 2. Spin up the clean .NET runtime SDK engine env
+    - name: Setup .NET Core SDK
+      uses: actions/setup-dotnet@v4
+      with:
+        dotnet-version: 8.x # Automatically matches your target MVC framework
+
+    # 3. Pull down required NuGet packages (Clearing old compiler errors)
+    - name: Restore Project Dependencies
+      run: dotnet restore
+
+    # 4. Compile the application assembly to check for syntax errors
+    - name: Build Solution
+      run: dotnet build --no-restore --configuration Release
+
+    # 5. Run the separate xUnit Test Project automatically (Requirement 4)
+    - name: Run Quality Assurance Tests
+      run: dotnet test --no-build --configuration Release --verbosity normal
